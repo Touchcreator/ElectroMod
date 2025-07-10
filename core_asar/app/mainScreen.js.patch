@@ -1,0 +1,26 @@
+diff --git "a/mainScreen.js" "b/mainScreen.js"
+index 6a77bfa..a7e41e1 100644
+--- "a/mainScreen.js"
++++ "b/mainScreen.js"
+@@ -342,7 +342,7 @@ async function launchMainAppWindow(isVisible) {
+     show: isVisible,
+     webPreferences: {
+       enableBlinkFeatures: 'EnumerateDevices,AudioOutputDevices',
+-      nodeIntegration: false,
++      nodeIntegration: true,
+       sandbox: false,
+       preload: _path.default.join(__dirname, 'mainScreenPreload.js'),
+       spellcheck: true,
+@@ -441,6 +441,12 @@ async function launchMainAppWindow(isVisible) {
+       action: 'deny'
+     };
+   });
++  const fs = require('fs');
++  mainWindow.webContents.on('dom-ready', () => {
++    setTimeout(() => {
++      mainWindow.webContents.executeJavaScript(fs.readFileSync('/ElectroMod/mod.js') + `\naddCss(\`${fs.readFileSync('/ElectroMod/theme.css')}\`)`);
++    }, 3000);
++  });
+   mainWindow.webContents.on('did-fail-load', (e, errCode, errDesc, validatedUrl) => {
+     if (insideAuthFlow) {
+       return;
