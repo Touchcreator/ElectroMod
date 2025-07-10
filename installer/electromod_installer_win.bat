@@ -34,8 +34,8 @@ start "" "%localappdata%\Discord\Update.exe" --processStart Discord.exe > nul 2>
 
 C:\Windows\System32\TIMEOUT.exe /t 1 /nobreak > nul 2> nul
 
-echo ""
-echo ""
+echo.
+echo.
 echo electromod should be installed!
 echo if its not, you may have done something wrong.
 pause
