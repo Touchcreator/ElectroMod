@@ -38,13 +38,32 @@ mkdir "\ElectroMod\" > nul 2>nul
 curl -L https://github.com/Touchcreator/ElectroMod/releases/download/dev/mod.js --output "\ElectroMod\mod.js" > nul 2>nul
 curl -L https://github.com/Touchcreator/ElectroMod/releases/download/dev/theme.css --output "\ElectroMod\theme.css" > nul 2>nul
 
-echo opening discord...
-start "" "%localappdata%\Discord\Update.exe" --processStart Discord.exe > nul 2> nul
-
 C:\Windows\System32\TIMEOUT.exe /t 1 /nobreak > nul 2> nul
 
 echo.
 echo.
 echo electromod should be installed!
-echo if its not, you may have done something wrong.
+echo update: you will also need open asar.
+pause
+
+echo.
+echo.
+
+echo tap a key to install.
+
+echo replacing app.asar
+if exist "%localappdata%\Discord\app-1.0.9199\resources\app.asar" (
+    copy /y "%localappdata%\Discord\app-1.0.9199\resources\app.asar" "%localappdata%\Discord\app-1.0.9199\resources\app.asar.backup" > nul 2>nul
+)
+
+if exist "%localappdata%\Discord\app-1.0.9199\resources\app.asar" (
+    del /f /q "%localappdata%\Discord\app-1.0.9199\resources\app.asar" > nul 2>nul
+)    
+curl -L https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar --output "%localappdata%\Discord\app-1.0.9199\resources\app.asar" > nul 2>nul
+
+echo.
+echo.
+echo installation complete!
+echo discord should now be open. thanks for considering electromod!
+start "" "%localappdata%\Discord\Update.exe" --processStart Discord.exe > nul 2> nul
 pause

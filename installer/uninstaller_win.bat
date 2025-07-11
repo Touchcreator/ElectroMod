@@ -28,9 +28,6 @@ if exist "%localappdata%\Discord\app-1.0.9199\modules\discord_desktop_core-1\dis
             rmdir "\ElectroMod" > nul 2>nul
         )
 
-    echo opening discord...
-    start "" "%localappdata%\Discord\Update.exe" --processStart Discord.exe > nul 2> nul
-
     C:\Windows\System32\TIMEOUT.exe /t 1 /nobreak > nul 2> nul
 
     echo.
@@ -46,6 +43,32 @@ if exist "%localappdata%\Discord\app-1.0.9199\modules\discord_desktop_core-1\dis
 
 ) else (
     echo you dont have a core.asar.backup file! reinstall discord instead.
+    pause
+    exit
+)
+
+echo uninstalling openasar
+if exist "%localappdata%\Discord\app-1.0.9199\resources\app.asar.backup" (
+    echo closing discord... this is needed to complete the uninstall (again)
+
+    taskkill /F /im "discord.exe" > nul 2> nul
+    taskkill /F /im "discord.exe" > nul 2> nul
+    taskkill /F /im "discord.exe" > nul 2> nul
+    taskkill /F /im "discord.exe" > nul 2> nul
+
+    if exist "%localappdata%\Discord\app-1.0.9199\resources\app.asar" (
+        del /f /q "%localappdata%\Discord\app-1.0.9199\resources\app.asar" > nul 2>nul
+        ren "%localappdata%\Discord\app-1.0.9199\resources\app.asar.backup" "app.asar"
+        echo done
+        pause
+        exit
+    ) else (
+        echo NO APP.ASAR?? WHAT DID TOU DO?
+        pause
+        exit
+    )
+) else (
+    echo you dont seem to have a backup app.asar.... but its alright cus open asar is cool
     pause
     exit
 )
