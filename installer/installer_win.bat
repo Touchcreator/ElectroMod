@@ -1,4 +1,13 @@
 @echo off
+echo welcome to the electromod installation script!
+echo are you sure you want to install electromod? press any key to proceed, otherwise, close this Window
+echo.
+echo.
+echo.
+pause
+
+echo proceeding...
+timeout /t 2 /nobreak > nul 2>nul
 echo closing discord... this is needed to complete the installation
 
 taskkill /F /im "discord.exe" > nul 2> nul
